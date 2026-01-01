@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Idle Gold Miner AI</title>
+    <style>
+        body { text-align: center; font-family: sans-serif; background: #1a1a1a; color: white; }
+        #gold { font-size: 48px; color: gold; }
+        button { padding: 15px; font-size: 18px; cursor: pointer; margin: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Passive Gold Miner</h1>
+    <div id="gold">0</div>
+    <p>Gold Per Second: <span id="gps">0</span></p>
+    
+    <button onclick="mine()">Manual Mine (+1)</button>
+    <button onclick="buyAuto()">Buy Auto-Miner (Cost: 50)</button>
+    <br>
+    <button onclick="showAd()" style="background: #4CAF50; color: white;">
+        Watch Ad for 2x Speed (10 Mins)
+    </button>
+
+    <script>
+        let gold = 0;
+        let gps = 0;
+        let multiplier = 1;
+
+        function mine() {
+            gold += 1 * multiplier;
+            updateUI();
+        }
+
+        function buyAuto() {
+            if (gold >= 50) {
+                gold -= 50;
+                gps += 1;
+                updateUI();
+            }
+        }
+
+        function showAd() {
+            alert("Integrating Ad Network... (e.g., AdSense or Unity Ads)");
+            // After ad finishes, trigger multiplier
+            multiplier = 2;
+            setTimeout(() => { multiplier = 1; }, 600000); 
+        }
+
+        setInterval(() => {
+            gold += gps * multiplier;
+            updateUI();
+        }, 1000);
+
+        function updateUI() {
+            document.getElementById('gold').innerText = Math.floor(gold);
+            document.getElementById('gps').innerText = gps * multiplier;
+        }
+    </script>
+</body>
+</html>
